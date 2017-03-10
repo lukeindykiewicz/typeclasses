@@ -5,6 +5,6 @@ import show.Show._
 
 object MainShow extends App {
 
-  println(intCanShow.show(20))
+  println(show(20))
 
 }
