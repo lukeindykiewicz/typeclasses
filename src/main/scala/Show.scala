@@ -6,7 +6,7 @@ trait Show[A] {
 
 object Show {
 
-  def show[A](a: A)(implicit sh: Show[A]) = sh.show(a)
+  def show[A : Show](a: A) = implicitly[Show[A]].show(a)
 
   implicit val intCanShow: Show[Int] =
     new Show[Int] {
