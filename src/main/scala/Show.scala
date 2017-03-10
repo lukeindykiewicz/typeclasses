@@ -10,6 +10,10 @@ object Show {
 
   def show[A: Show](a: A) = Show[A].show(a)
 
+  implicit class ShowOps[A: Show](a: A) {
+    def show = Show[A].show(a)
+  }
+
   implicit val intCanShow: Show[Int] =
     new Show[Int] {
       def show(int: Int): String = s"int $int"
