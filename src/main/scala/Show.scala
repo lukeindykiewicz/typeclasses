@@ -14,14 +14,15 @@ object Show {
     def show = Show[A].show(a)
   }
 
+  def instance[A](func: A => String): Show[A] =
+      new Show[A] {
+        def show(a: A): String = func(a)
+      }
+
   implicit val intCanShow: Show[Int] =
-    new Show[Int] {
-      def show(int: Int): String = s"int $int"
-    }
+      instance(int => s"int $int")
 
   implicit val stringCanShow: Show[String] =
-    new Show[String]{
-      def show(str: String): String = s"string $str"
-    }
+      instance(str => s"string $str")
 
 }
