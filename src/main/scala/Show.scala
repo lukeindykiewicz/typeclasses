@@ -19,4 +19,9 @@ object Show {
       def show(int: Int): String = s"int $int"
     }
 
+  implicit val stringCanShow: Show[String] =
+    new Show[String]{
+      def show(str: String): String = s"string $str"
+    }
+
 }
