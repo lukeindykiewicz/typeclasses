@@ -12,6 +12,7 @@ object Show {
 
   implicit class ShowOps[A: Show](a: A) {
     def show = Show[A].show(a)
+    def showExp(implicit sh: Show[A]) = sh.show(a)
   }
 
   implicit val intCanShow: Show[Int] =
