@@ -3,6 +3,10 @@ package mainshow
 import show.Show
 import show.Show._
 
+//for simulacrum based implementation
+import showsimulacrum.ShowSim
+import showsimulacrum.ShowSim.ops._
+
 object MainShow extends App {
 
   case class Foo(foo: Int)
@@ -14,5 +18,7 @@ object MainShow extends App {
   println(30.show)
   println("foofoo".show)
   println(Foo(42).show)
+
+  println("bar".showSim)
 
 }
