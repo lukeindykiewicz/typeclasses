@@ -13,6 +13,17 @@ scalaVersion := "2.12.1"
 //   )
 // }
 
+libraryDependencies ++= Seq(
+  "com.chuusai"     %% "shapeless"    % "2.3.2",
+  "org.scala-lang"  % "scala-reflect" % scalaVersion.value
+)
+
 //for simulacrum
 addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
 libraryDependencies += "com.github.mpilquist" %% "simulacrum" % "0.10.0"
+
+//for shapeless
+resolvers ++= Seq(
+  Resolver.sonatypeRepo("releases"),
+  Resolver.sonatypeRepo("snapshots")
+)

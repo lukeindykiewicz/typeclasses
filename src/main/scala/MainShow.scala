@@ -10,9 +10,7 @@ import showsimulacrum.ShowSim.ops._
 object MainShow extends App {
 
   case class Foo(foo: Int)
-
-  implicit val fooShow: Show[Foo] =
-    foo => s"case class Foo(foo: ${foo.foo})"
+  case class Bar(b: Int, a: String, r: Int)
 
   println(show(20))
   println(30.show)
@@ -25,9 +23,12 @@ object MainShow extends App {
 
   {
     implicit val hipsterString: Show[String] =
-      str => s"""hipster string "$str"."""
+      str => s"""hipster string $str."""
 
     println("bazbaz".show)
   }
+
+  println(Bar(123, "11", 42))
+  println(Bar(123, "11", 42).show)
 
 }
