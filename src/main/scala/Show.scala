@@ -34,18 +34,25 @@ object Show {
   implicit val hnilCanShow: Show[HNil] =
     hnil => ""
 
-  implicit def hlistCanShow[H, T <: HList](
+  implicit def hlistCanShow[K <: Symbol, H, T <: HList](
     implicit
+    witness: Witness.Aux[K],
     headCanShow: Show[H],
     tailCanShow: Show[T]
-  ): Show[H :: T] =
-    { case h :: t => s"${headCanShow.show(h)}, ${tailCanShow.show(t)}" }
+  ): Show[FieldType[K, H] :: T] =
+    { case h :: t => {
+      val name = witness.value.name
+      s"${name}: ${headCanShow.show(h)}, ${tailCanShow.show(t)}"
+    } }
 
-  implicit def genericCanShow[A, R](
+  implicit def genericCanShow[A, H <: HList](
     implicit
-    gen: Generic.Aux[A,R],
-    canShow: Show[R]
+    gen: LabelledGeneric.Aux[A, H],
+    canShow: Lazy[Show[H]],
+    tag: TypeTag[A]
   ): Show[A] =
-    a => canShow.show(gen.to(a))
+    a => {
+      s"${tag.tpe} :: ${canShow.value.show(gen.to(a))}"
+    }
 
 }
