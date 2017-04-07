@@ -1,4 +1,4 @@
-package eq
+package typeclass.eq
 
 import shapeless.{ HList, HNil, :: }
 import shapeless.{ Coproduct, CNil, :+:, Inl, Inr }
@@ -15,7 +15,7 @@ object Eq {
 
   object ops {
     implicit class EqOps[T: Eq](a: T) {
-      def ===(b: T): Boolean = Eq[T].equ(a, b)
+      def |=|(b: T): Boolean = Eq[T].equ(a, b)
     }
   }
 
