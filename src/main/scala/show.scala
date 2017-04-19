@@ -1,11 +1,8 @@
 package show
 
-import shapeless.{ HNil, HList, :: }
-import shapeless._
-import shapeless.labelled.{ field, FieldType }
-import shapeless.Generic
+import shapeless.{ HNil, HList, ::, Lazy }
+import shapeless.labelled.FieldType
 import shapeless.LabelledGeneric
-import shapeless.{Coproduct, :+:, CNil, Inl, Inr}
 import shapeless.Witness
 import scala.reflect.runtime.universe.TypeTag
 
