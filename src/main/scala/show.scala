@@ -39,7 +39,9 @@ object Show {
   ): Show[FieldType[K, H] :: T] =
     { case h :: t => {
       val name = witness.value.name
-      s"${name}: ${headCanShow.show(h)}, ${tailCanShow.show(t)}"
+      val head = headCanShow.show(h)
+      val tail = tailCanShow.show(t)
+      s"${name}: $head, $tail"
     } }
 
   implicit def genericCanShow[A, H <: HList](
@@ -49,7 +51,8 @@ object Show {
     tag: TypeTag[A]
   ): Show[A] =
     a => {
-      s"${tag.tpe} :: ${canShow.value.show(gen.to(a))}"
+      val sh = canShow.value.show(gen.to(a))
+      s"${tag.tpe} :: $sh"
     }
 
 }
