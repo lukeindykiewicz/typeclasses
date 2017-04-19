@@ -5,12 +5,9 @@ import org.scalatest._
 import sum.Sum.ops._
 import sum.Sum2.ops._
 
-import typeclass.eq.Eq
-import typeclass.eq.Eq.ops._
-
 class SumSpec extends FlatSpec with Matchers {
 
-  "sum of ints" should "sum two ints" in {
+  "sum" should "sum two ints" in {
     1 |+| 2 shouldBe 3
   }
 
@@ -26,40 +23,43 @@ class SumSpec extends FlatSpec with Matchers {
     List(1,2,3).map(_ |+| 2) shouldBe List(3,4,5)
   }
 
-  it should "work with equals" in {
-    1 |+| 2 |+| 3 |=| 6 shouldBe true
-  }
-
-  "sum of strings" should "concatenate strings" in {
+  it should "concatenate strings" in {
     "hello" |+| "world" shouldBe "helloworld"
   }
 
-  "sum different types" should "do wired things" in {
+  it should "do wired things for this specific example" in {
     5 |+| "hello" shouldBe true
   }
 
-  "sum of functions" should "behave like andThen" in {
+  it should "behave like andThen for functions" in {
     val f1: String => Int = _.length
     val f2: Int => String = n => "hello" * n
     val f3: String => String = f1 |+| f2
     f3("..") shouldBe "hellohello"
   }
 
-  "sum of more functions" should "behave like andThen" in {
+  it should "behave like andThen for more functions" in {
     val f1: String => Int = _.length
     val f2: Int => String = n => "hello" * n
     val f3: String => Int = f1 |+| f2 |+| f1
     f3("..") shouldBe 10
   }
 
-  "product types" should "add each elemment respectively" in {
+  it should "add each elemment respectively for product types" in {
     case class Foo(a: Int, b: Int, c: String)
 
     Foo(10, 100, "foo") |+| Foo(1, 11, "bar") shouldBe Foo(11, 111, "foobar")
   }
 
-  "coproduct types" should "add values in option" in {
+  it should "add values in option for coproduct types" in {
     Some(2) |+| Some(5) shouldBe Some(7)
+  }
+
+  "sum and eq" should "work properly together" in {
+    import typeclass.eq.Eq
+    import typeclass.eq.Eq.ops._
+    
+    1 |+| 2 |+| 3 |=| 6 shouldBe true
   }
 
 }

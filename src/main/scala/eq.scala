@@ -28,6 +28,7 @@ object Eq {
   implicit val booleanEq: Eq[Boolean] =
     (a: Boolean, b: Boolean) => a == b
 
+  // This is not production code!
   import scala.concurrent.Future
   implicit def futureEq[T, R](
     implicit
