@@ -77,4 +77,10 @@ class EqSpec extends FlatSpec with Matchers {
     14 |=| 14 shouldBe false
   }
 
+  it should "compare tuples" in {
+    (10, "foo") |=| (10, "foo") shouldBe true
+    (10, "foo", 11, true) |=| (10, "foo", 11, true) shouldBe true
+    (10, "foo") |=| (10, "bar") shouldBe false
+  }
+
 }
